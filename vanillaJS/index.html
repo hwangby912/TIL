@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="hphk">Happy Hacking</h1>
+    <h2 id="visitor"></h2>
+    <div>
+      <a href="#" id="who-button">who said what?</a>
+      <span id="answerer"></span>
+    </div>
+    <div>
+      <span id="counter">0</span>
+      <button id="counter-plus-button">PLUS</button>
+      <button id="counter-minus-button">MINUS</button>
+      <button id="counter-reset-button">RESET</button>
+    </div>
+    <script>
+      //   alert("아 집가고 싶다. ");
+      //   const visitor = prompt("Who are you?");
+      //   const whoVisit = document.querySelector("#visitor");
+      //   if (visitor == "hby") {
+      //     whoVisit.innerHTML = visitor + "님 어서오세요";
+      //   } else {
+      //     whoVisit.innerHTML = visitor + "님 Get Out";
+      //   }
+
+      //   const whoButton = document.querySelector("#who-button");
+      //   whoButton.addEventListener("click", () => {
+      //     document.querySelector("#answerer").innerHTML = visitor;
+      //   });
+
+      let number = 0;
+      const counter = document.querySelector("#counter");
+      const plusButton = document.querySelector("#counter-plus-button");
+      plusButton.addEventListener("click", () => {
+        number++;
+        counter.innerHTML = number;
+      });
+      const minusButton = document.querySelector("#counter-minus-button");
+      minusButton.addEventListener("click", () => {
+        number--;
+        counter.innerHTML = number;
+      });
+      const resetButton = document.querySelector("#counter-reset-button");
+      minusButton.addEventListener("click", () => {
+        number = 0;
+        counter.innerHTML = number;
+      });
+    </script>
+  </body>
+</html>
