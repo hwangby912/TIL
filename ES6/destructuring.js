@@ -9,7 +9,7 @@ const computer = {
 // const year = computer.year;
 // const price = computer.price;
 
-// ES6
+// ES6 중복을 피하기 위해 이렇게 쓰는 방식을 JS에서 지원함
 const labtop = {
   model: "gram",
   year: 2018,
