@@ -10,7 +10,7 @@ getUserCallback(1, user => {
   console.log("user finding");
   getRepo(user.githubID, repo => {
     console.log("repo finding");
-    getCommits(repo.commitID, commit => {
+    getCommits(repo.commitsID, commit => {
       console.log("commit finding");
       console.log(commit);
     });
@@ -18,10 +18,7 @@ getUserCallback(1, user => {
 });
 console.log(user);
 console.log("code end!");
-const users = [
-  { id: 1, githubID: "Hwang" },
-  { id: 2, githubID: "Shin" }
-];
+const users = [{ id: 1, githubID: "Hwang" }, { id: 2, githubID: "Shin" }];
 function getUser(id) {
   //DB에 접속해서 유저를 찾는 함수
   let user;
@@ -42,9 +39,7 @@ function getRepo(githubID, callback) {
     { githubID: "Shin", commitsID: 2 }
   ];
   setTimeout(() => {
-    const repo = repos.find(
-      repo => repo.githubID === githubID
-    );
+    const repo = repos.find(repo => repo.githubID === githubID);
     callback(repo);
   }, 2000);
 }
@@ -54,9 +49,7 @@ function getCommits(commitID, callback) {
     { commitsID: 2, contents: "Bye" }
   ];
   setTimeout(() => {
-    const commit = commits.find(
-      commit => commit.commitID === commitID
-    );
+    const commit = commits.find(commit => commit.commitsID === commitID);
     callback(commit);
   }, 2000);
 }
