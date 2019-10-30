@@ -50,13 +50,12 @@ class App extends React.Component {
     const res = await axios.get(url);
     const { data } = res; // const data = res.data;
     data.sort((first, last) => {
-      if (first.category < last.category) return -1;
-      if (first.category > last.category) return 1;
-      return 0;
-      /*
-      같은 Logic
+      // if (first.category < last.category) return -1;
+      // if (first.category > last.category) return 1;
+      // return 0;
+
+      // 같은 Logic
       return first.category < last.category ? -1 : 1;
-      */
     });
     this.setState({ data }); // this.setState({ data : data })
     console.log(data);
