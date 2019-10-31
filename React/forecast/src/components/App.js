@@ -54,12 +54,14 @@ const App = () => {
         <h1>Forecast</h1>
       </header>
       <main className="container">
-        {!current ? (
+        {!current || !forecast ? (
           <Spinner />
         ) : (
-          <Current current={current} unit={unit} setUnit={setUnit} />
+          <>
+            <Current current={current} unit={unit} setUnit={setUnit} />
+            <Forecast forecast={forecast} unit={unit} />}
+          </>
         )}
-        {!forecast ? <Spinner /> : <Forecast forecast={forecast} unit={unit} />}
       </main>
     </>
   );
