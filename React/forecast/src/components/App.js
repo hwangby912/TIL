@@ -59,7 +59,7 @@ const App = () => {
         ) : (
           <>
             <Current current={current} unit={unit} setUnit={setUnit} />
-            <Forecast forecast={forecast} unit={unit} />}
+            <Forecast forecast={forecast} unit={unit} />
           </>
         )}
       </main>
