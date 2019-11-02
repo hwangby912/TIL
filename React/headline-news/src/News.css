@@ -1,0 +1,19 @@
+.title {
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  color: brown;
+}
+.author {
+  display: flex;
+  justify-content: center;
+  color: blue;
+}
+.url {
+  display: flex;
+  justify-content: center;
+}
+.table {
+  width: 100%;
+  border: 1px solid #444444;
+}
