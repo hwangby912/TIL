@@ -9,18 +9,17 @@ class App extends Component {
   componentDidMount() {
     this._getNews();
   }
-
   _renderNews = () => {
     const news = this.state.news.map(articles => {
       console.log(articles);
-      const company = articles.url.split("/");
-      // console.log(company);
       return (
         <News
           author={articles.author}
           title={articles.title}
           url={articles.url}
-          source={company[2]}
+          urlToImage={articles.urlToImage}
+          source={articles.source}
+          description={articles.description}
         />
       );
     });
@@ -46,17 +45,15 @@ class App extends Component {
     return (
       <>
         <div className="App">
-          <h1>
+          <div clock>
             <Clock
               className="clock"
-              format={"YYYY - MM - DD"}
+              format={"YYYY년 MM월 DD일"}
               ticking={false}
               timezone={"kr"}
             />
-          </h1>
-          <header className="header-padding">
-            <h1>Today HeadLine News</h1>
-          </header>
+          </div>
+          <header className="header-padding">TODAY NEWS</header>
           <main className="container">
             <div className={news ? "App" : "App-loading"}>
               {news ? this._renderNews() : "로딩중 ..."}
