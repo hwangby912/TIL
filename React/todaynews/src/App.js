@@ -5,7 +5,9 @@ import News from "./News";
 import "./App.css";
 
 class App extends Component {
-  state = {};
+  state = {
+    country: ""
+  };
   componentDidMount() {
     this._getNews();
   }
@@ -32,7 +34,7 @@ class App extends Component {
       news
     });
   };
-  _callApi = () => {
+  _callApi = country => {
     return fetch(
       `https://newsapi.org/v2/top-headlines?country=kr&apiKey=3659c1fa349c4449bd079c8211909132`
     )
@@ -40,12 +42,24 @@ class App extends Component {
       .then(json => json.articles)
       .catch(err => console.log(err));
   };
+
+  // _changeLangSelect = async e => {
+  //   console.log(e);
+  //   await this.setState({ value: e.target.value });
+  //   this._callApi(this.state.country);
+  // };
+
   render() {
     const { news } = this.state;
+    // this._changeLangSelect();
     return (
       <>
+        <select onChange={this._changeLangSelect}>
+          <option value="us">미국</option>
+          <option value="kr">대한한국</option>
+        </select>
         <div className="App">
-          <div clock>
+          <div>
             <Clock
               className="clock"
               format={"YYYY년 MM월 DD일"}
