@@ -8,5 +8,5 @@ app.use("api/user", user);
 app.use("api/article", article);
 
 app.listen(3000, () => {
-  console.log("server start ....");
+  console.log("Server Running ....");
 });

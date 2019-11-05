@@ -4,17 +4,17 @@ const helmet = require("helmet");
 const app = express();
 
 app.use(helmet());
-app.use(express.json());
+app.use(express.json()); // 미들웨어
 
 const courses = [
   { id: 1, name: "HappyHacking!" },
   { id: 2, name: "Real Artist Ship" },
-  { id: 3, name: "See the invisible", email: "hphk@email.com" }
+  { id: 3, name: "See the invisible" }
 ];
 
 function getCourseById(id) {
-  const courseId = parseInt(id);
-  return courses.find(el => el.id === courseId);
+  const coureseId = parseInt(id);
+  return (course = courses.find(el => el.id === coureseId));
 }
 
 function validate(input) {
@@ -30,24 +30,25 @@ function validate(input) {
 }
 
 app.get("/", (req, res) => {
-  res.send("해피해킹이에요!");
+  res.send("HPHK!");
 });
 
+//router middleware입니다.
 app.get("/api/courses", (req, res) => {
   res.send(courses);
-}); //router 미들웨어입니다.
+});
 
 app.get("/api/course/:id", (req, res) => {
   const course = getCourseById(req.params.id);
   if (!course) {
-    res.status(404).send("해당하는 코스가 없습니다");
+    res.status(404).send("course not exist");
   } else {
     res.send(`<h1>${course.name}</h1>`);
   }
 });
 
-app.post("/api/course", (req, res) => {
-  const { value, error } = validate(req.body);
+app.post("/api/course", (req, res, error) => {
+  console.log(validate(req.body));
   if (error) {
     res.send(error.details[0].message);
     return;
@@ -60,13 +61,11 @@ app.post("/api/course", (req, res) => {
   courses.push(course);
   res.send(course);
 });
-
-//patch 보통 일부를 수정할때,
-//put은 한 요소 전체를 교체한다는 느낌
+// patch:일부를 수정, put: 한 요소 전체를 교체한다는 느낌
 app.patch("/api/course/:id", (req, res) => {
   const course = getCourseById(req.params.id);
   if (!course) {
-    res.send("해당하는 데이터가 없습니다");
+    res.send("data not exist");
   } else {
     const name = req.body.name;
     course.name = name;
@@ -77,7 +76,7 @@ app.patch("/api/course/:id", (req, res) => {
 app.delete("/api/course/:id", (req, res) => {
   const course = getCourseById(req.params.id);
   if (!course) {
-    res.send("해당하는 데이터가 없습니다");
+    res.send("data not exist");
   } else {
     const index = courses.indexOf(course);
     courses.splice(index, 1);
@@ -86,5 +85,4 @@ app.delete("/api/course/:id", (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-
 app.listen(3000, () => console.log(`Listening on port ${port}....`));

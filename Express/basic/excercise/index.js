@@ -35,7 +35,7 @@ app.patch("/api/user/:id", (req, res) => {
 app.delete("/api/user/:id", (req, res) => {
   const user = getUser(req.params.id);
   if (!user) {
-    res.send("해당하는 데이터가 없습니다");
+    res.send("data not exist");
   } else {
     const index = users.indexOf(user);
     users.splice();
@@ -45,5 +45,5 @@ app.delete("/api/user/:id", (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log("server start ....");
+  console.log("server running ....");
 });

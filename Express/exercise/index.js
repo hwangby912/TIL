@@ -1,23 +1,17 @@
 const express = require("express");
 const Joi = require("@hapi/joi");
-
 const app = express();
 
 const users = [
-  {
-    id: 1,
-    name: "byeongyoon",
-    email: "quddbs912@naver.com",
-    birthDay: "01-14-1993"
-  }
+  { id: 1, name: "CRUD", email: "quddbs912@naver.com", birthDay: "11-05-1999" }
 ];
-let userId = 2;
 
-app.use(express.json());
+app.use(express.json()); //post 요청을 받도록 middleware 설정
 
 function getUser(id) {
   return users.find(user => user.id === parseInt(id));
 }
+
 function validate(input) {
   const schema = Joi.object({
     name: Joi.string()
@@ -30,28 +24,32 @@ function validate(input) {
   });
   return schema.validate(input);
 }
-//CRUD
 
-//READ
+app.get("/", (req, res) => {
+  res.send("Full Screen");
+});
+// CRUD
+// READ
 app.get("/api/users", (req, res) => {
   res.send(users);
 });
-app.get("/api/users/:id", (req, res) => {
+
+app.get("/api/user/:id", (req, res) => {
   const user = getUser(req.params.id);
   if (!user) {
-    res.send("id not exist");
+    res.send("User not exist!");
     return;
   }
   res.send(user);
 });
-//CREATE
+// CREATE
 app.post("/api/user", (req, res) => {
+  console.log(validate(req.body));
   const { error } = validate(req.body);
   if (error) {
     res.send(error.details[0].message);
     return;
   }
-
   const user = {
     id: userId,
     name: req.body.name,
@@ -62,7 +60,8 @@ app.post("/api/user", (req, res) => {
   users.push(user);
   res.send(user);
 });
-//UPDATE
+// update
+// patch:일부를 수정, put: 한 요소 전체를 교체한다는 느낌
 app.patch("/api/user/:id", (req, res) => {
   const { error } = validate(req.body);
   if (error) {
@@ -76,19 +75,17 @@ app.patch("/api/user/:id", (req, res) => {
   user.birthDay = birthDay;
   res.send(user);
 });
-//DELETE
+// DELETE
 app.delete("/api/user/:id", (req, res) => {
   const user = getUser(req.params.id);
   if (!user) {
-    res.send("data not exist");
+    res.send("User not exist");
   } else {
-    const index = users.indexOf(users);
+    const index = users.indexOf(user);
     users.splice(index, 1);
     res.send(user);
   }
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log("Server Running");
-});
+app.listen(3000, () => console.log(`Listening on port ${port}....`));
