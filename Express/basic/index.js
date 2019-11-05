@@ -7,6 +7,7 @@ const courses = [
   { id: 3, name: "See the invisible" }
 ];
 
+// middleware
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -26,7 +27,7 @@ app.get("/api/course/:id", (req, res) => {
   if (!course) {
     res.status(404).send("This course is not exist");
   } else {
-    res.send(course);
+    res.send(`<h1>${course}</h1>`);
   }
 });
 
@@ -67,6 +68,8 @@ app.delete("/api/course/:id", (req, res) => {
   }
 });
 
+const port = process.env.PORT || 3000;
+
 app.listen(3000, () => {
-  console.log("Listening on port 3000");
+  console.log(`Listening on port ${port}`);
 });
