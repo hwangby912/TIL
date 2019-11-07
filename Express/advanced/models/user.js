@@ -19,10 +19,9 @@ function validateUser(user) {
     articles: Joi.array().items(Joi.string())
   });
 
-  // 검증 결과를 return 해줌
+  // 겁증 결과를 return 해줌
   return schema.validate(user);
 }
-
 module.exports = {
   User,
   validateUser

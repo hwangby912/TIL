@@ -16,10 +16,8 @@ function validateArticle(article) {
     author: Joi.string(),
     contents: Joi.string()
   });
-
   return schema.validate(article);
 }
-
 module.exports = {
   Article,
   validateArticle
