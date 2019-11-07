@@ -31,7 +31,7 @@ const courseSchema = new mongoose.Schema({
 const Author = mongoose.model("Author", authorSchema);
 const Course = mongoose.model("Course", courseSchema);
 
-// Document 추가하기 CRUD 중 Create
+// CRUD 중 Create
 async function create() {
   const author = new Author({
     name: "Hwang",
@@ -52,6 +52,9 @@ async function create() {
   console.log(courseSaveResult);
 }
 
+// create();
+
+// CRUD 중 Read
 async function read() {
   const authors = await Author.find();
   console.log(authors);
@@ -89,4 +92,32 @@ async function read() {
     .select("name tags price");
 }
 
-read();
+// read();
+
+// CRUD 중 Update
+// 2가지 방법이 있음
+// 1. 데이터를 조회해서 수정한 후 저장
+// 2. 바로 수정하는 방법
+async function update() {
+  // 1번 방법
+  const course = await Course.findById("5dc2595ee06b5326008b663d");
+  course.name = "JSON Array";
+  await course.save();
+}
+
+// update();
+
+async function update2() {
+  const updated = await Course.updateMany({ isPublished: true }, { price: 30 });
+  console.log(updated);
+}
+
+// update2();
+
+// CRUD 중 Delete
+async function remove() {
+  const deleted = await Course.deleteOne({ id: "5dc2595ee06b5326008b663d" });
+  console.log(deleted);
+}
+
+remove();
