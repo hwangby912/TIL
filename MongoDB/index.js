@@ -114,6 +114,15 @@ async function update2() {
 
 // update2();
 
+async function update3() {
+  const updated = await Course.find()
+    .where({ isPublished: true })
+    .updateMany({ price: 20 });
+  console.log(updated);
+}
+
+update3();
+
 // CRUD 중 Delete
 async function remove() {
   const deleted = await Course.deleteOne({ id: "5dc2595ee06b5326008b663d" });
