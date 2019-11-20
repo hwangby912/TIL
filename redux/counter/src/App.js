@@ -28,6 +28,11 @@ export default function App() {
         type="text"
         value={color}
         onChange={e => setColor(e.target.value)}
+        onKeyUp={e => {
+          if (e.keyCode === 13) {
+            dispatch(changeTheme(color));
+          }
+        }}
       />
       <button onClick={() => dispatch(changeTheme(color))}>Change Theme</button>
     </div>
